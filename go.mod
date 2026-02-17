@@ -3,7 +3,7 @@ module github.com/bassosimone/safeconn
 go 1.25.5
 
 require (
-	github.com/bassosimone/netstub v0.0.0-20260122214332-4e68c49ba4df
+	github.com/bassosimone/netstub v0.0.0-20260215140819-e5f4b4b48997
 	github.com/stretchr/testify v1.11.1
 )
 
