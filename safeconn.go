@@ -15,8 +15,13 @@ package safeconn
 
 import "net"
 
+// LocalAddrer allows extracting the local address.
+type LocalAddrer interface {
+	LocalAddr() net.Addr
+}
+
 // LocalAddr returns the conn local address or the empty string.
-func LocalAddr(conn net.Conn) (value string) {
+func LocalAddr(conn LocalAddrer) (value string) {
 	if conn != nil {
 		if addr := conn.LocalAddr(); addr != nil {
 			value = addr.String()
@@ -25,8 +30,13 @@ func LocalAddr(conn net.Conn) (value string) {
 	return
 }
 
+// RemoteAddrer allows extracting the remote address.
+type RemoteAddrer interface {
+	RemoteAddr() net.Addr
+}
+
 // RemoteAddr returns the conn remote address or the empty string.
-func RemoteAddr(conn net.Conn) (value string) {
+func RemoteAddr(conn RemoteAddrer) (value string) {
 	if conn != nil {
 		if addr := conn.RemoteAddr(); addr != nil {
 			value = addr.String()
@@ -36,7 +46,7 @@ func RemoteAddr(conn net.Conn) (value string) {
 }
 
 // Network returns the conn network or the empty string.
-func Network(conn net.Conn) (value string) {
+func Network(conn LocalAddrer) (value string) {
 	if conn != nil {
 		if addr := conn.LocalAddr(); addr != nil {
 			value = addr.Network()
